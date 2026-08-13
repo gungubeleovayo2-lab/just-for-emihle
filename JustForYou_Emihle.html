@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Just For You ❤️</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #fff0f5, #ffe4ec, #fff8fb);
+    color: #5b2940;
+    overflow-x: hidden;
+  }
+  .hearts { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+  .heart {
+    position: absolute;
+    bottom: -40px;
+    animation: float 8s linear infinite;
+    opacity: .55;
+    font-size: 22px;
+  }
+  @keyframes float {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    15% { opacity: .6; }
+    100% { transform: translateY(-110vh) rotate(25deg); opacity: 0; }
+  }
+  .wrap {
+    position: relative;
+    z-index: 1;
+    width: min(760px, 92%);
+    margin: 0 auto;
+    padding: 55px 0;
+  }
+  .card {
+    background: rgba(255,255,255,.88);
+    border: 1px solid rgba(214, 92, 133, .18);
+    border-radius: 28px;
+    padding: 34px;
+    box-shadow: 0 18px 55px rgba(125, 45, 78, .14);
+    text-align: center;
+    margin-bottom: 22px;
+  }
+  .hidden { display: none; }
+  .small { letter-spacing: 2px; text-transform: uppercase; font-size: 12px; color: #b55a7b; }
+  h1 { font-family: Georgia, serif; font-size: clamp(38px, 8vw, 64px); margin: 12px 0; color: #9f315d; }
+  h2 { font-family: Georgia, serif; color: #9f315d; }
+  p { line-height: 1.75; font-size: 16px; }
+  .subtitle { font-size: 18px; }
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+  }
+  button {
+    border: 0;
+    border-radius: 999px;
+    padding: 14px 30px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+  }
+  button:hover { transform: translateY(-3px); box-shadow: 0 9px 20px rgba(159,49,93,.2); }
+  .yes { background: #d95b86; color: white; }
+  .no { background: #f6d5df; color: #8d3558; }
+  .message {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 20px;
+    background: #fff3f7;
+    animation: pop .35s ease;
+  }
+  @keyframes pop { from { transform: scale(.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .letter {
+    text-align: left;
+    padding: 10px 8px;
+  }
+  .letter p { font-size: 17px; }
+  .signature {
+    text-align: center;
+    font-family: Georgia, serif;
+    font-size: 22px;
+    color: #9f315d;
+    margin-top: 25px;
+  }
+  .next {
+    margin-top: 20px;
+    background: #9f315d;
+    color: white;
+  }
+  .seal { font-size: 45px; }
+  .footer { text-align:center; font-size:12px; color:#b56b86; margin-top:25px; }
+</style>
+</head>
+<body>
+<div class="hearts">
+  <span class="heart" style="left:8%;animation-delay:0s;">♡</span>
+  <span class="heart" style="left:20%;animation-delay:2s;">♥</span>
+  <span class="heart" style="left:38%;animation-delay:4s;">♡</span>
+  <span class="heart" style="left:58%;animation-delay:1s;">♥</span>
+  <span class="heart" style="left:76%;animation-delay:3s;">♡</span>
+  <span class="heart" style="left:90%;animation-delay:5s;">♥</span>
+</div>
+
+<main class="wrap">
+  <section class="card" id="welcome">
+    <div class="small">A tiny little surprise</div>
+    <div class="seal">💌</div>
+    <h1>For You, Emihle</h1>
+    <p class="subtitle">I made you a little something...</p>
+    <p>There is only one tiny rule: <strong>no giving you a chance to choose.</strong> 😂❤️</p>
+    <button class="next" onclick="show('game')">Open it ❤️</button>
+  </section>
+
+  <section class="card hidden" id="game">
+    <div class="small">The very serious game</div>
+    <h2>Question 1 💕</h2>
+    <p>Do you accept that someone has been completely obsessed with your smile, your laugh, your energy and that pretty face?</p>
+    <div class="buttons">
+      <button class="yes" onclick="answer('yes1')">YES ❤️</button>
+      <button class="no" onclick="answer('no1')">NO 🙈</button>
+    </div>
+    <div id="reply1"></div>
+  </section>
+
+  <section class="card hidden" id="game2">
+    <div class="small">Still not giving you a choice...</div>
+    <h2>Question 2 😌</h2>
+    <p>Do you agree that the way you talk, walk, laugh and act goofy is ridiculously attractive?</p>
+    <div class="buttons">
+      <button class="yes" onclick="answer('yes2')">YES 😍</button>
+      <button class="no" onclick="answer('no2')">NO 😂</button>
+    </div>
+    <div id="reply2"></div>
+  </section>
+
+  <section class="card hidden" id="game3">
+    <div class="small">Last one, promise...</div>
+    <h2>Question 3 💍</h2>
+    <p>Should I keep loving you, appreciating you and treating you like the precious little egg you are?</p>
+    <div class="buttons">
+      <button class="yes" onclick="answer('yes3')">YES, OBVIOUSLY ❤️</button>
+      <button class="no" onclick="answer('no3')">NO 😭</button>
+    </div>
+    <div id="reply3"></div>
+  </section>
+
+  <section class="card hidden" id="afterGame">
+    <div class="seal">🥹❤️</div>
+    <h2>Okay... you survived.</h2>
+    <p>No matter which answers you clicked, somehow the answer was always the same:</p>
+    <h2>YOU. ❤️</h2>
+    <p>And since I promised there would be no giving you a chance to choose... here comes the part I actually wanted you to read.</p>
+    <button class="next" onclick="show('letter')">Read my letter 💌</button>
+  </section>
+
+  <section class="card hidden" id="letter">
+    <div class="small">A letter for you</div>
+    <div class="letter">
+      <h2>Dear Emihle,</h2>
+      <p>I hope this letter finds you well. Please forgive me if I am love bombing you!!! 😂❤️</p>
+
+      <p>Anyways, you will be fine. The main purpose of this letter is to ask you a hand...</p>
+
+      <p><strong>“Will you marry me?”</strong> 💍</p>
+
+      <p>Joking! 😂 Well, I wouldn’t mind <em>ukusa emagcekeni ekhaya</em>. 😭❤️</p>
+
+      <p>To be honest with you, I want you to know that you are loved by me. I love you so much!! I love everything about you — your energy, your goofy side, your smile, the way you talk, the way you laugh and your pretty face.</p>
+
+      <p>You are so gorgeous, baby. ❤️</p>
+
+      <p>Thank you for giving me a chance and allowing me to be with you. You are the best thing I could ever ask God for this year.</p>
+
+      <p>I promise to love you, respect you and treat you like an egg. 🥚❤️</p>
+
+      <p><strong>I love you.</strong></p>
+
+      <div class="signature">XXX<br>O ❤️</div>
+    </div>
+    <p class="footer">END MESSAGE. ❤️</p>
+  </section>
+</main>
+
+<script>
+function show(id) {
+  document.getElementById(id).classList.remove('hidden');
+  document.getElementById(id).scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function answer(type) {
+  const n = type.slice(-1);
+  const yes = type.startsWith('yes');
+  const reply = document.getElementById('reply' + n);
+
+  const messages = {
+    yes1: "I KNEW IT. 😌❤️ But honestly, I didn't need your answer. I've been noticing all those things since the moment I first saw you in that classroom.",
+    no1: "HAHA, nice try. 😂❤️ Your answer has been respectfully rejected because your smile is still one of my favourite things about you.",
+    yes2: "Exactly! 😍❤️ And somehow you still don't realise how attractive you are. The way you talk, walk and laugh? Dangerous.",
+    no2: "Ma'am... we're going to pretend you didn't click that. 😂❤️ Because I have already made up my mind about how gorgeous you are.",
+    yes3: "Good answer. Very wise. 😌❤️ Now please continue being cute while I continue loving you.",
+    no3: "Unfortunately, this answer has been denied by the Department of My Heart. 😂❤️ You don't get to stop me from loving you."
+  };
+
+  reply.innerHTML = '<div class="message">' + messages[type] + '</div>';
+
+  setTimeout(() => {
+    const next = Number(n) + 1;
+    if (next <= 3) {
+      show('game' + next);
+    } else {
+      show('afterGame');
+    }
+  }, 1100);
+}
+</script>
+</body>
+</html>
